@@ -3,7 +3,6 @@
 SHELL := /bin/bash
 SUDO := $(shell test $${EUID} -ne 0 && echo "sudo")
 .EXPORT_ALL_VARIABLES:
-SERIAL ?= $(shell python3 serial_number.py)
 SYSCFG = /etc/mavlink-router
 CONFIG ?= /var/local
 LIBSYSTEMD=/lib/systemd/system
@@ -17,7 +16,7 @@ default:
 	@echo ""
 	@echo "  install: install mavlink-router service and helper apps"
 	@echo "  disable: disable the mavlink-router service"
-	@echo "  see: view the system's serial number"
+	@echo "  see: view the system's mavlink-router configuration"
 	@echo "  uninstall: stop, disable and remove the mavlink-router service"
 	@echo ""
 
