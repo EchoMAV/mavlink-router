@@ -76,7 +76,8 @@ see:
 	$(SUDO) cat $(SYSCFG)/main.conf
 
 serial:
-	python3 serial_number.py
+	-python3 serial_number.py 0
+	-python3 serial_number.py 0
 
 uninstall:
 	@$(MAKE) --no-print-directory disable
