@@ -48,7 +48,7 @@ install:
 	@$(SUDO) apt install git ninja-build pkg-config gcc g++ systemd
 	@$(SUDO) apt install python3-pip
 	@$(SUDO) pip3 install meson smbus
-	@export PATH := ~/.local/bin:$(PATH)
+	export PATH := ~/.local/bin:$(PATH)
 	@meson setup build . --buildtype=release
 	@cd ~
 
