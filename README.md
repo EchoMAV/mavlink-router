@@ -39,7 +39,7 @@ sudo nano /etc/mavlink-router/main.conf
 ```
 Reboot the system to ensure user permissions are applied. The mavlink-router service will start automatically using the settings in the /etc/mavlink-router/main.conf` file.
 
-## Configuring, Srarting and Stoping
+## Configuring, Starting and Stopping
 
 Mavlink-router will be installed as a system service, and will start automatically (see `/lib/systemd/system/mavlink-router.service`) at boot using the configuration defined in `/etc/mavlink-router/main.conf`.  
 
