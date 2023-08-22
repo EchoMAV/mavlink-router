@@ -46,7 +46,7 @@ Mavlink-router will be installed as a system service, and will start automatical
 To edit the configuration file
 ```
 sudo nano /etc/mavlink-router/main.conf
-``
+```
 To stop the service:  
 ```
 sudo systemctl stop mavlink-router
