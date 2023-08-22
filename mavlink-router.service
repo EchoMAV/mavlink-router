@@ -1,0 +1,15 @@
+[Unit]
+Description=mavlink-router
+After=network.target multi-user.target
+RequiresMountsFor=/etc /usr
+
+[Service]
+ExecStart=/usr/bin/mavlink-routerd
+StandardOutput=journal
+StandardError=journal
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+
