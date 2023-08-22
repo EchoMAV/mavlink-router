@@ -42,7 +42,7 @@ install:
 	@$(SUDO) apt install htop
 	@$(SUDO) apt install picocom
 # install mavlink-router
-	@git rm -rf ~/tmp/mavlink-router-source
+	@rm -rf ~/tmp/mavlink-router-source
 	@git clone https://github.com/mavlink-router/mavlink-router.git ~/tmp/mavlink-router-source && cd ~/tmp/mavlink-router-source
 	@git submodule update --init --recursive
 	@$(SUDO) apt install git ninja-build pkg-config gcc g++ systemd
