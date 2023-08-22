@@ -8,6 +8,7 @@ CONFIG ?= /var/local
 LIBSYSTEMD=/lib/systemd/system
 SERVICES=mavlink-router.service
 DRY_RUN=false
+export PATH := ~/.local/bin:$(PATH)
 
 .PHONY = enable install see uninstall 
 
@@ -48,8 +49,7 @@ install:
 	@$(SUDO) apt install git ninja-build pkg-config gcc g++ systemd
 	@$(SUDO) apt install python3-pip
 	@$(SUDO) pip3 install meson smbus
-	export PATH := ~/.local/bin:$(PATH)
-	SHELL := env PATH=$(PATH) /bin/bash
+	@$(SUDO) export PATH
 	@meson setup build . --buildtype=release
 	@cd ~
 
