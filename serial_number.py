@@ -1,6 +1,9 @@
 import smbus
+import sys
 
-i2c_ch = 1
+# usage, pass the i2c bus as the first argument, e.g. python3 serial_number 0
+
+i2c_ch = int(sys.argv[1]) 
 
 # address on the I2C bus
 i2c_address = 0x58
