@@ -59,3 +59,13 @@ To restart the service:
 ```
 sudo systemctl restart mavlink-router
 ```
+## Receiving Telemetry Data with a GCS
+
+This most common and simplest configuration method is for mavlink-router to be a UDP client. In the `main.conf` file, enter the IP address of the computer on your network running the GCS software (QGroundControl or MissionPlanner recommended). 
+```
+[UdpEndpoint alpha]
+Mode = Normal
+Address = 192.168.?.?  # Change this to your GCS's IP Address
+Port = 14550
+```
+Both QGroundControl and MissionPlanner will accept UDP connections on port 14550 by default (no specific configuration required).
