@@ -8,7 +8,6 @@ CONFIG ?= /var/local
 LIBSYSTEMD=/lib/systemd/system
 SERVICES=mavlink-router.service
 DRY_RUN=false
-export PATH := ~/.local/bin:$(PATH)
 
 .PHONY = enable install see uninstall 
 
@@ -45,10 +44,10 @@ install:
 # install mavlink-router
 	@rm -rf ~/tmp/mavlink-router-source
 	@git clone https://github.com/mavlink-router/mavlink-router.git ~/tmp/mavlink-router-source && cd ~/tmp/mavlink-router-source && git submodule update --init --recursive
-	@$(SUDO) apt install git ninja-build pkg-config gcc g++ systemd
-	@$(SUDO) apt install python3-pip
+	@$(SUDO) apt -y install git ninja-build pkg-config gcc g++ systemd
+	@$(SUDO) apt -y install python3-pip
 	@$(SUDO) pip3 install meson smbus
-	@cd ~/tmp/mavlink-router-source && meson setup build .
+	@cd ~/tmp/mavlink-router-source && meson setup build . && $(SUDO) ninja -C build install
 
 # install the config file
 	@$(SUDO) mkdir -p $(SYSCFG)
