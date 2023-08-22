@@ -25,7 +25,7 @@ To perform an initial install, clone the repository.
 Issue the following commands:
 
 ```
-git clone https://github.com/echomav/mavlink-router.git ~/tmp
+git clone https://github.com/echomav/mavlink-router.git ~/tmp/mavlink-router
 ```
 
 then continue:
