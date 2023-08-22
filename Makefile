@@ -66,8 +66,12 @@ install:
 	@$(SUDO) usermod -aG tty echopilot
 	@echo ""
 	@echo "The installation is complete. To configure mavlink-router, please edit $(SYSCFG)/main.conf, e.g. sudo nano $(SYSCFG)/main.conf"
-	@echo "After a change in $(SYSCFG)/main.conf restart mavlink-router using sudo systemctl restart mavlink-router or reboot"
+	@echo ""
+	@echo "After a change in $(SYSCFG)/main.conf restart mavlink-router using sudo systemctl restart mavlink-router or reboot."
+	@echo ""
 	@echo "Please reboot to change required user permissions and complete the installation..."
+	@echo ""
+	@echo ""
 
 see:
 	$(SUDO) cat $(SYSCFG)/main.conf
