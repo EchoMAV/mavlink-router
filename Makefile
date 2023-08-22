@@ -75,6 +75,9 @@ install:
 see:
 	$(SUDO) cat $(SYSCFG)/main.conf
 
+serial:
+	python3 serial_number.py
+
 uninstall:
 	@$(MAKE) --no-print-directory disable
 	@( for s in $(SERVICES) ; do $(SUDO) rm $(LIBSYSTEMD)/$${s%.*}.service ; done ; true )
