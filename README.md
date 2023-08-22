@@ -23,6 +23,7 @@ All software dependencies will be installed automatically by during `make instal
 
 To perform an initial install, clone the repository.
 Issue the following commands:
+
 ```
 git clone https://github.com/echomav/mavlink-router.git ~/tmp
 ```
@@ -35,7 +36,7 @@ make -C ~/tmp/mavlink-router install
 To configure your system, edit the self-documeted configuration file `/etc/mavlink-router/main.conf`
 ```
 sudo nano /etc/mavlink-router/main.conf
-``
+```
 
 ## Running
 
