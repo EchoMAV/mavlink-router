@@ -21,5 +21,10 @@ def read_serial():
 # Initialize I2C (SMBus)
 bus = smbus.SMBus(i2c_ch)
 
-# Print out the serial number
-print(bytes(read_serial()).hex())
+try:
+    # Print out the serial number
+    print(bytes(read_serial()).hex())
+
+except:
+    pass
+    
