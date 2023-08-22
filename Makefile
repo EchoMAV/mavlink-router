@@ -35,7 +35,7 @@ enable:
 	@echo "Inspect output with sudo journalctl -fu mavlink-router"
 	@echo ""
 
-install: dependencies	
+install: 	
 # install helper apps
 	@$(SUDO) apt update
 	@$(SUDO) apt install nano
