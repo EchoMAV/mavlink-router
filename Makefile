@@ -51,7 +51,7 @@ install:
 	@cd ~/tmp/mavlink-router-source && meson setup build .
 
 # install the config file
-	@$(SUDO) mmkdir -p $(SYSCFG)
+	@$(SUDO) mkdir -p $(SYSCFG)
 	@$(SUDO) cp main.conf $(SYSCFG)/.
 
 # install mavlink-router service
