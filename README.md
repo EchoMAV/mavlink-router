@@ -32,6 +32,7 @@ then continue:
 ```
 make -C ~/tmp/mavlink-router install
 ```
+The system may ask for the password.  
 
 To configure your system, edit the self-documeted configuration file `/etc/mavlink-router/main.conf`
 ```
