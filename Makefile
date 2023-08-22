@@ -77,7 +77,7 @@ see:
 
 serial:
 	-python3 serial_number.py 0
-	-python3 serial_number.py 0
+	-python3 serial_number.py 1
 
 uninstall:
 	@$(MAKE) --no-print-directory disable
