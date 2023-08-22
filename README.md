@@ -21,25 +21,25 @@ All software dependencies will be installed automatically by during `make instal
 
 ## Installation
 
-To perform an initial install, clone the repository.
+To perform an initial install, first gain console and internet access per links above, then clone the repository.
 Issue the following commands:
 
 ```
 git clone https://github.com/echomav/mavlink-router.git ~/tmp/mavlink-router
 ```
-
-then continue:
+then install :
 ```
 make -C ~/tmp/mavlink-router install
 ```
-The system may ask for the password.  
+The system may ask for the password at this point.
 
 To configure your system, edit the self-documeted configuration file `/etc/mavlink-router/main.conf`
 ```
 sudo nano /etc/mavlink-router/main.conf
 ```
+Reboot the system to ensure user permissions are applied. The mavlink-router service will start automatically using the settings in the /etc/mavlink-router/main.conf` file.
 
-## Running
+## Configuring, Srarting and Stoping
 
 Mavlink-router will be installed as a system service, and will start automatically (see `/lib/systemd/system/mavlink-router.service`) at boot using the configuration defined in `/etc/mavlink-router/main.conf`.  
 
