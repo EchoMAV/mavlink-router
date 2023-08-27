@@ -31,7 +31,7 @@ then install:
 ```
 make -C ~/tmp/mavlink-router install
 ```
-Optional, if you wish to set up a static IP address on the system, derives from the last two octects of the eth0 interface's MAC address, run:
+*Optional*, if you wish to set up a static IP address on the system, derives from the last two octects of the eth0 interface's MAC address, run:
 ```
 make -C ~/tmp/mavlink-router static
 ```
@@ -39,7 +39,12 @@ The default confguration will have the FMU data arriving on `/dev/ttyTHS1` at 50
 ```
 sudo nano /etc/mavlink-router/main.conf
 ```
-Reboot the system to ensure user permissions are applied. The mavlink-router service will start automatically using the settings in the /etc/mavlink-router/main.conf` file.
+Reboot the system to ensure user permissions are applied. The mavlink-router service will start automatically using the settings in the /etc/mavlink-router/main.conf` file.  
+
+*Optional*, if you wish to set both install mavlink-router AND set up a static IP address, you can use the default make target
+```
+make -C ~/tmp/mavlink-router
+```
 
 ## Configuring, Starting and Stopping
 
