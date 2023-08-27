@@ -48,6 +48,14 @@ if [ -z $IFACE ]; then
         exit 1
 fi
 
+# install vlan
+$SUDO apt -y install vlan
+
+exist=$(modinfo 8021q 2>/dev/null)
+if [ -z "$exist" ] ; then     # if not present, install
+        $SUDO modprobe --first-time 8021q
+fi
+
 if [ $IP_INPUT = "auto" ]; then    
     ifconfig ${IFACE} &> /dev/null
     if [ $? -ne 0 ] 
@@ -120,14 +128,6 @@ then
     $SUDO nmcli c mod "static-$IFACE" ifname $IFACE gw4 $GATEWAY 
 fi
 $SUDO nmcli c up "static-$IFACE"
-
-# install vlan
-$SUDO apt -y install vlan
-
-exist=$(modinfo 8021q 2>/dev/null)
-if [ -z "$exist" ] ; then     # if not present, install
-        $SUDO modprobe --first-time 8021q
-fi
 
 # check if there is already an interface called vlan-config, if so take down and delete
 state=$(nmcli -f GENERAL.STATE c show "vlan-config" 2>/dev/null)
