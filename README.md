@@ -31,7 +31,7 @@ then install:
 ```
 make -C ~/tmp/mavlink-router install
 ```
-*Optional*, if you wish to set up a static IP address on the system, derives from the last two octects of the eth0 interface's MAC address, run:
+*Optional*, if you wish to set up a static IP address on the system, with the address automatically derived from the last two octects of the `eth0` interface's MAC address, run:
 ```
 make -C ~/tmp/mavlink-router static
 ```
