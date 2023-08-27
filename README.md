@@ -31,28 +31,30 @@ then install:
 ```
 make -C ~/tmp/mavlink-router install
 ```
-*Optional*, if you wish to set up a static IP address on the system, with the address automatically derived from the last two octects of the `eth0` interface's MAC address, run:
+The default confguration will have the FMU data arriving on `/dev/ttyTHS1` at `500,000` bps and sending to the UDP endpoint at `10.223.1.10:14550`. To configure mavlink-router with different settings, edit the self-documented configuration file `/etc/mavlink-router/main.conf`, for example using `nano` as shown below:
+```
+sudo nano /etc/mavlink-router/main.conf     # Use Ctrl-o, Ctrl-x to save/exit
+```
+Reboot the system `sudo reboot` to ensure user permissions are applied. The mavlink-router service will start automatically  on the next boot using the settings in the `/etc/mavlink-router/main.conf` file.  
+
+*Optional*, if you wish to set up a static IP address on the EchoPilot AI, with the address automatically derived from the last two octects of the `eth0` interface's MAC address, run:
 ```
 make -C ~/tmp/mavlink-router static
 ```
-The default confguration will have the FMU data arriving on `/dev/ttyTHS1` at 500,000 bps and sending to the UDP endpoint at `10.223.1.10:14550`. To configure your system with different settings, edit the self-documeted configuration file `/etc/mavlink-router/main.conf`, for example using `nano` as shown below:
-```
-sudo nano /etc/mavlink-router/main.conf
-```
-Reboot the system to ensure user permissions are applied. The mavlink-router service will start automatically using the settings in the /etc/mavlink-router/main.conf` file.  
+Be sure to make not of the static IP address assigned at the end of the installation script.  
 
-*Optional*, if you wish to set both install mavlink-router AND set up a static IP address, you can use the default make target
+*Optional*, if you wish to install both mavlink-router AND set up a static IP address, you can use the default make target to do both with one command:
 ```
 make -C ~/tmp/mavlink-router
 ```
 
-## Configuring, Starting and Stopping
+## Configuring, Starting and Stopping Mavlink-Router
 
 Mavlink-router will be installed as a system service, and will start automatically (see `/lib/systemd/system/mavlink-router.service`) at boot using the configuration defined in `/etc/mavlink-router/main.conf`.  
 
 To edit the configuration file
 ```
-sudo nano /etc/mavlink-router/main.conf
+sudo nano /etc/mavlink-router/main.conf  # Use Ctrl-o, Ctrl-x to save/exit
 ```
 To stop the service:  
 ```
