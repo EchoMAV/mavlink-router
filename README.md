@@ -77,11 +77,11 @@ Mode = Normal
 Address = 10.223.1.10  # Change this to your GCS's IP Address
 Port = 14550
 ```
-Both QGroundControl and MissionPlanner will accept UDP connections on port 14550 by default (no specific configuration required).  If you have any firewalls in your system, you will need to allow access to port 14550.
+Both QGroundControl and MissionPlanner will accept UDP connections on port 14550 by default (no specific configuration required). If you have any firewalls in your system, you will need to allow access to port 14550.
 
 ## Static IP Configuration Utility
 
-The included `static-network.sh` utility can be used standalone as a helper script to set up static ip addresses. When using `make static` above, this script is called with the following arguments: `./static-network.sh -i eth0 -a auto`.  
+The included `static-network.sh` utility can be used standalone as a helper script to set up a static ip address on the EchoPilot AI, which is the preferred setup for many/most UAS applications. When using `make static` above, this script is called with the following arguments: `./static-network.sh -i eth0 -a auto`.  
 
 The general script usage is:  
 ```
