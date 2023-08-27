@@ -5,7 +5,7 @@
 # If auto is used, the static IP address will be set to 10.223.x.y where x and y are the last two octects of the network interface mac address
 
 IP_PREFIX="10.223"
-VLAN_ADDR="192.168.154.0/24"
+BACKDOOR_ADDR="192.168.154.0/24"
 sigterm_handler() { 
   echo "Shutdown signal received."
   exit 1
@@ -111,7 +111,7 @@ if [ ! -z "$exist" ] ; then     # delete the interface if it exists
 fi
 
 echo "Creating new connection static-$IFACE..."
-$SUDO nmcli c add con-name "static-$IFACE" ifname $IFACE type ethernet ip4 "$HOST/$NETMASK,$VLAN_ADDR"
+$SUDO nmcli c add con-name "static-$IFACE" ifname $IFACE type ethernet ip4 "$HOST/$NETMASK,$BACKDOOR_ADDR"
 
 # if gateway was provided, add that info to the connection
 if [[ "$GATEWAY" == *.* ]]
