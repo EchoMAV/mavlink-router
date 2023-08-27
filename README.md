@@ -90,4 +90,8 @@ The command above would set `eth0`'s address to `192.168.1.100` with a `255.255.
 ```
 ip link show
 ```
+### Backdoor VLAN
+
+The `static-network.sh` also creates a backdoor VLAN at `192.168.154.0/24` which can be used to access the device if you no longer know the static IP address or do not have serial/usb console access. To use this backdoor, set up a host computer to an IP in the same netmask, e.g. `192.168.154.10` with a netmask of `255.255.255.0` and then you can access the device at `192.168.154.0`, for example `ssh echopilot@192.168.154.0`.  
+This backdoor/configuration IP address is designed to be used during configuration only and should never be used when more than one EchoPilot AI is on the network. 
 

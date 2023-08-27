@@ -1,5 +1,5 @@
 # Makefile for installation of mavlink-router on EchoPilot AI hardware
-
+.DEFAULT_GOAL := default
 SHELL := /bin/bash
 SUDO := $(shell test $${EUID} -ne 0 && echo "sudo")
 .EXPORT_ALL_VARIABLES:
@@ -9,16 +9,9 @@ LIBSYSTEMD=/lib/systemd/system
 SERVICES=mavlink-router.service
 DRY_RUN=false
 
-.PHONY = enable install see uninstall static
+.PHONY = enable install see uninstall static default
 
-default:
-	@echo "Please choose an action:"
-	@echo ""
-	@echo "  install: install mavlink-router service and helper apps"
-	@echo "  disable: disable the mavlink-router service"
-	@echo "  see: view the system's mavlink-router configuration"
-	@echo "  uninstall: stop, disable and remove the mavlink-router service"
-	@echo ""
+default: install static
 
 
 disable:
@@ -65,8 +58,8 @@ install:
 # set up the system permissions, stop/disable nvgetty etc
 	@$(SUDO) systemctl stop nvgetty
 	@$(SUDO) systemctl disable nvgetty
-	@$(SUDO) usermod -aG dialout echopilot
-	@$(SUDO) usermod -aG tty echopilot
+	@$(SUDO) usermod -aG dialout $${USER}
+	@$(SUDO) usermod -aG tty $${USER}
 	@echo ""
 	@echo "The installation is complete. To configure mavlink-router, please edit $(SYSCFG)/main.conf, e.g. sudo nano $(SYSCFG)/main.conf"
 	@echo ""
