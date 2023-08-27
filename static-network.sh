@@ -112,7 +112,7 @@ if [ ! -z "$exist" ] ; then     # delete the interface if it exists
 fi
 
 echo "Creating new connection static-$IFACE..."
-$SUDO nmcli c add con-name "static-$IFACE" ifname $IFACE type ethernet ip4 "$HOST/$NETMASK,$BACKDOOR_ADDR"
+$SUDO nmcli c add con-name "static-$IFACE" ifname $IFACE type ethernet +ipv4.addresses "$HOST/$NETMASK,$BACKDOOR_ADDR"
 
 # if gateway was provided, add that info to the connection
 if [[ "$GATEWAY" == *.* ]]
