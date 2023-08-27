@@ -25,11 +25,11 @@ To perform an initial install, first gain console and internet access per links 
 Issue the following commands:
 
 ```
-git clone https://github.com/echomav/mavlink-router.git ~/tmp/mavlink-router
+git clone https://github.com/echomav/mavlink-router.git /tmp/mavlink-router
 ```
 then install:
 ```
-make -C ~/tmp/mavlink-router install
+make -C /tmp/mavlink-router install
 ```
 The default confguration will have the FMU data arriving on `/dev/ttyTHS1` at `500,000` bps and sending to the UDP endpoint at `10.223.1.10:14550`. To configure mavlink-router with different settings, edit the self-documented configuration file `/etc/mavlink-router/main.conf`, for example using `nano` as shown below:
 ```
