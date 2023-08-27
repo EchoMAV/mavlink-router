@@ -48,14 +48,6 @@ if [ -z $IFACE ]; then
         exit 1
 fi
 
-# install vlan
-$SUDO apt -y install vlan
-
-exist=$(modinfo 8021q 2>/dev/null)
-if [ -z "$exist" ] ; then     # if not present, install
-        $SUDO modprobe --first-time 8021q
-fi
-
 if [ $IP_INPUT = "auto" ]; then    
     ifconfig ${IFACE} &> /dev/null
     if [ $? -ne 0 ] 
@@ -119,7 +111,7 @@ if [ ! -z "$exist" ] ; then     # delete the interface if it exists
 fi
 
 echo "Creating new connection static-$IFACE..."
-$SUDO nmcli c add con-name "static-$IFACE" ifname $IFACE type ethernet ip4 $HOST/$NETMASK
+$SUDO nmcli c add con-name "static-$IFACE" ifname $IFACE type ethernet ip4 "$HOST/$NETMASK,$VLAN_ADDR"
 
 # if gateway was provided, add that info to the connection
 if [[ "$GATEWAY" == *.* ]]
@@ -128,19 +120,6 @@ then
     $SUDO nmcli c mod "static-$IFACE" ifname $IFACE gw4 $GATEWAY 
 fi
 $SUDO nmcli c up "static-$IFACE"
-
-# check if there is already an interface called vlan-config, if so take down and delete
-state=$(nmcli -f GENERAL.STATE c show "vlan-config" 2>/dev/null)
-if [[ "$state" == *activated* ]] ; then         # take the interface down
-        $SUDO nmcli c down "vlan-config"
-fi
-exist=$(nmcli c show "vlan-config" 2>/dev/null)
-if [ ! -z "$exist" ] ; then     # delete the interface if it exists
-        $SUDO nmcli c delete "vlan-config"
-fi
-
-$SUDO nmcli c add type vlan con-name vlan-config ifname vlan10 dev $IFACE id 10 ip4 $VLAN_ADDR
-$SUDO nmcli c up vlan-config
 
 echo "";
 echo "Static Ethernet Configuration Successful! Interface static-$IFACE is set to $HOST/$NETMASK"
