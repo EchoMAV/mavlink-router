@@ -27,13 +27,15 @@ Issue the following commands:
 ```
 git clone https://github.com/echomav/mavlink-router.git ~/tmp/mavlink-router
 ```
-then install :
+then install:
 ```
 make -C ~/tmp/mavlink-router install
 ```
-The system may ask for the password at this point.
-
-To configure your system, edit the self-documeted configuration file `/etc/mavlink-router/main.conf`
+Optional, if you wish to set up a static IP address on the system, derives from the last two octects of the eth0 interface's MAC address, run:
+```
+make -C ~/tmp/mavlink-router static
+```
+The default confguration will have the FMU data arriving on `/dev/ttyTHS1` at 500,000 bps and sending to the UDP endpoint at `10.223.1.10:14550`. To configure your system with different settings, edit the self-documeted configuration file `/etc/mavlink-router/main.conf`, for example using `nano` as shown below:
 ```
 sudo nano /etc/mavlink-router/main.conf
 ```
@@ -61,11 +63,32 @@ sudo systemctl restart mavlink-router
 ```
 ## Receiving Telemetry Data with a GCS
 
-This most common and simplest configuration method is for mavlink-router to be a UDP client. In the `main.conf` file, enter the IP address of the computer on your network running the GCS software (QGroundControl or MissionPlanner recommended). 
+This most common and simplest configuration method is for mavlink-router to be a UDP client. In the `main.conf` file, enter the IP address of the computer on your network running the GCS software (QGroundControl or MissionPlanner recommended). Using the default settings, set your computer's IP address to 10.223.1.10 with a netmask of 255.255.0.0.  
 ```
 [UdpEndpoint alpha]
 Mode = Normal
-Address = 192.168.?.?  # Change this to your GCS's IP Address
+Address = 10.223.1.10  # Change this to your GCS's IP Address
 Port = 14550
 ```
-Both QGroundControl and MissionPlanner will accept UDP connections on port 14550 by default (no specific configuration required).
+Both QGroundControl and MissionPlanner will accept UDP connections on port 14550 by default (no specific configuration required).  If you have any firewalls in your system, you will need to allow access to port 14550.
+
+## Static IP Configuration Utility
+
+The included `static-network.sh` utility can be used standalone as a helper script to set up static ip addresses. When using "make static" above, this script is called with the following arguments:  
+``./static-network.sh -i eth0 -a auto```.  
+
+The scripts usage is:  
+```
+./static-network.sh -i interface_name -a ip_addres|auto -g gateway_address(optional)
+```
+Passing `auto` to the `-a` argument uses the specified interface's MAC address to form a unique static IP address. The last two octets of the MAC address are converted to decimal and used for the last two octets of the IP address. For example, if the MAC address is 34:73:5a:e8:57:3f, the last two octetcs 57:3f will convert to 87.63 and the static IP will be set to 10.223.87.63. When using auto, the netmask /16 (255.255.0.0) is used.
+
+You can also specific a specific static IP address as well as a gateway address. For example:
+```
+./static-network.sh -i eth0 -a 192.168.1.100/24 -g 192.168.1.1
+```
+Nomrally the Ethernet interface on Jetson devices is called `eth0` however if you wish to use this script to configure a different interface, you can see the names of you system's interfaces with:
+```
+ip link show
+```
+
