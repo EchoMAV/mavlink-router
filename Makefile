@@ -9,7 +9,7 @@ LIBSYSTEMD=/lib/systemd/system
 SERVICES=mavlink-router.service
 DRY_RUN=false
 
-.PHONY = enable install see uninstall 
+.PHONY = enable install see uninstall static
 
 default:
 	@echo "Please choose an action:"
@@ -33,6 +33,10 @@ enable:
 	@echo "Service is installed. To run now use sudo systemctl start mavlink-router"
 	@echo "Inspect output with sudo journalctl -fu mavlink-router"
 	@echo ""
+
+static:
+# set up static ip address on eth0
+	@$(SUDO) ./static-network.sh -i eth0 -a auto
 
 install: 	
 # install helper apps
