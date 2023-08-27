@@ -86,7 +86,7 @@ You can also specify a specific static IP address as well as a gateway address. 
 ```
 ./static-network.sh -i eth0 -a 192.168.1.100/24 -g 192.168.1.1
 ```
-Nomrally the Ethernet interface (`-i` argumment) on Jetson devices is called `eth0`, however if you wish to use this script to configure a different interface, you can see the names of you system's interfaces with the commannd below and the pass the appropriate interface name to the `-i` argument:
+The command above would set `eth0`'s address to `192.168.1.100` with a `255.255.255.0` netmask and a gateway of `192.168.1.1`. Normally the Ethernet interface (`-i` argumment) on Jetson devices is called `eth0`, however if you wish to use this script to configure a different interface, you can see the names of you system's interfaces with the commannd below and the pass the appropriate interface name to the `-i` argument:
 ```
 ip link show
 ```
