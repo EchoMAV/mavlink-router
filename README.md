@@ -39,13 +39,13 @@ Reboot the system `sudo reboot` to ensure user permissions are applied. The mavl
 
 *Optional*, if you wish to set up a static IP address on the EchoPilot AI, with the address automatically derived from the last two octects of the `eth0` interface's MAC address, run:
 ```
-make -C ~/tmp/mavlink-router static
+make -C /tmp/mavlink-router static
 ```
 Be sure to make not of the static IP address assigned at the end of the installation script.  
 
 *Optional*, if you wish to install both mavlink-router AND set up a static IP address, you can use the default make target to do both with one command:
 ```
-make -C ~/tmp/mavlink-router
+make -C /tmp/mavlink-router
 ```
 
 ## Configuring, Starting and Stopping Mavlink-Router
