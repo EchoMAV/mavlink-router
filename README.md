@@ -74,20 +74,19 @@ Both QGroundControl and MissionPlanner will accept UDP connections on port 14550
 
 ## Static IP Configuration Utility
 
-The included `static-network.sh` utility can be used standalone as a helper script to set up static ip addresses. When using "make static" above, this script is called with the following arguments:  
-``./static-network.sh -i eth0 -a auto```.  
+The included `static-network.sh` utility can be used standalone as a helper script to set up static ip addresses. When using `make static` above, this script is called with the following arguments: `./static-network.sh -i eth0 -a auto`.  
 
-The scripts usage is:  
+The general script usage is:  
 ```
 ./static-network.sh -i interface_name -a ip_addres|auto -g gateway_address(optional)
 ```
-Passing `auto` to the `-a` argument uses the specified interface's MAC address to form a unique static IP address. The last two octets of the MAC address are converted to decimal and used for the last two octets of the IP address. For example, if the MAC address is 34:73:5a:e8:57:3f, the last two octetcs 57:3f will convert to 87.63 and the static IP will be set to 10.223.87.63. When using auto, the netmask /16 (255.255.0.0) is used.
+Passing `auto` to the `-a` argument uses the specified interface's MAC address as a way to form a unique static IP address. The last two octets of the MAC address are converted to decimal and used for the last two octets of the IP address. For example, if the MAC address is 34:73:5a:e8:57:3f, the last two octets 57:3f will convert (hexadecimal to decimal) to 87.63 and the static IP will be set to 10.223.87.63. When using `-a auto`, the netmask `/16` (255.255.0.0) is used.
 
-You can also specific a specific static IP address as well as a gateway address. For example:
+You can also specify a specific static IP address as well as a gateway address. For example:
 ```
 ./static-network.sh -i eth0 -a 192.168.1.100/24 -g 192.168.1.1
 ```
-Nomrally the Ethernet interface on Jetson devices is called `eth0` however if you wish to use this script to configure a different interface, you can see the names of you system's interfaces with:
+Nomrally the Ethernet interface (`-i` argumment) on Jetson devices is called `eth0`, however if you wish to use this script to configure a different interface, you can see the names of you system's interfaces with the commannd below and the pass the appropriate interface name to the `-i` argument:
 ```
 ip link show
 ```
