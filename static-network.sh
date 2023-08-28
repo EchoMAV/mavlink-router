@@ -3,7 +3,7 @@
 # This script sets up a static network on the EchoPilot AI using NetworkManager (nmcli)
 # usage: static-network.sh -i {interface} -a {ip_addres|auto} -g {gateway(optional)}
 # If auto is used, the static IP address will be set to 10.223.x.y where x and y are the last two octects of the network interface mac address
-# An ali
+# An alias is also added to the interface with the value of BACKDOOR_ADDR below
 
 IP_PREFIX="10.223"
 BACKDOOR_ADDR="192.168.154.0/24"
