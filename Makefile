@@ -11,8 +11,9 @@ DRY_RUN=false
 
 .PHONY = enable install see uninstall static default
 
-default: install static
-
+default: 
+	@$(MAKE) --no-print-directory install 
+	@$(MAKE) --no-print-directory static
 
 disable:
 	@( for c in stop disable ; do $(SUDO) systemctl $${c} $(SERVICES) ; done ; true )
