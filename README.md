@@ -2,7 +2,7 @@
 
 ## What is Mavlink-router?
 
-[MAVLink Router](https://github.com/mavlink-router/mavlink-router) is an open-source application to distribute MAVLink messages between multiple endpoints (connections). It distributes packets to a single port or multiple endpoints depending on the target address. Connections can be made via UART, UDP or TCP (see the endpoints chapter for details). For the EchoPilot AI, the most common application is to to accept data from the serial port (e.g. on `/dev/ttyTHS1`) and forward it to a ground control system over the network using either UDP or TCP (supporting both client and server configurations).
+[MAVLink Router](https://github.com/mavlink-router/mavlink-router) is an open-source application to distribute MAVLink messages between multiple endpoints (connections). It distributes packets to a single port or multiple endpoints depending on the target address. Connections can be made via UART, UDP or TCP (see the endpoints chapter for details). For the EchoPilot AI, the most common application is to to accept data from the serial port (e.g. on `/dev/ttyTHS0`) (or `/dev/ttyTHS1` on some Jetson devices) and forward it to a ground control system over the network using either UDP or TCP (supporting both client and server configurations).
 
 This repository provides a makefile to easily install mavlink-router on a Jetson running on the EchoPilot AI hardware. It also sets up a service `mavlink-router` to start at boot.
 
