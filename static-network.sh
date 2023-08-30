@@ -1,7 +1,7 @@
 #!/bin/bash
 # EchoMAV, LLC
 # This script sets up a static network on the EchoPilot AI using NetworkManager (nmcli)
-# usage: static-network.sh -i {interface} -a {ip_addres|auto} -g {gateway(optional)}
+# usage: static-network.sh -i {interface} -a {ip_addres|auto|dhcp} -g {gateway(optional)}
 # If auto is used, the static IP address will be set to 10.223.x.y where x and y are the last two octects of the network interface mac address
 # The first two octets cab be changed per IP_PREFIX
 # An alias is also added to the interface with the value of BACKDOOR_ADDR
@@ -77,7 +77,19 @@ if [ $IP_INPUT = "auto" ]; then
     HOST="$IP_PREFIX.$OCT1DEC.$OCT2DEC";
     NETMASK=16;
     echo "Auto-calculated IP is $HOST/$NETMASK";
-    
+
+elif [ $IP_INPUT = "dhcp" ]; then 
+  #if static-iface exists, then mod to dhcp
+  exist=$(nmcli c show "static-$IFACE" 2>/dev/null)  
+  if [ ! -z "$exist" ] ; then     # delete the interface if it exists
+        $SUDO nmcli con mod "static-$IFACE" ipv4.address ""
+        $SUDO nmcli con mod "static-$IFACE" ipv4.method auto
+        $SUDO nmcli con down "static-$IFACE"
+        $SUDO nmcli con up "static-$IFACE"
+  else
+    echo "Error: connection static-$IFACE is not found. This script is only designed to convert an existing static-$IFACE to DHCP"; 
+  fi
+
 else
     # validate ip address
     if [[ ! $IP_INPUT =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\/[0-9]{1,3}$ ]]; then
@@ -129,4 +141,4 @@ $SUDO nmcli c mod "static-$IFACE" +ipv4.addresses "$BACKDOOR_ADDR"
 $SUDO nmcli c up "static-$IFACE"
 
 echo "";
-echo "Static Ethernet Configuration Successful! Interface static-$IFACE is set to $HOST/$NETMASK"
+echo "Static Ethernet Configuration Successful! Interface $IFACE is set to $HOST/$NETMASK"
