@@ -89,6 +89,8 @@ elif [ $IP_INPUT = "dhcp" ]; then
   else
     echo "Error: connection static-$IFACE is not found. This script is only designed to convert an existing static-$IFACE to DHCP"; 
   fi
+  echo "Connection static-$IFACE is now set to DHCP";
+  exit
 
 else
     # validate ip address
