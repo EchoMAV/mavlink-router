@@ -42,7 +42,7 @@ install:
 	@$(SUDO) apt install picocom
 # install mavlink-router
 	@rm -rf ~/tmp/mavlink-router-source
-	@git clone https://github.com/mavlink-router/mavlink-router.git ~/tmp/mavlink-router-source && cd ~/tmp/mavlink-router-source && git submodule update --init --recursive
+	@git clone https://github.com/EchoMAV/mavlink-router-src ~/tmp/mavlink-router-source && cd ~/tmp/mavlink-router-source && git submodule update --init --recursive
 	@$(SUDO) apt -y install git ninja-build pkg-config gcc g++ systemd
 	@$(SUDO) apt -y install python3-pip
 	@$(SUDO) pip3 install meson smbus
